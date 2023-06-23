@@ -1,85 +1,73 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div class="wrapper center">
+      <h1>Tin Nguyen Trong</h1>
+      <h2>description</h2>
+      <div class="space"></div>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <div class="groups">
+        <md-outlined-button href="https://github.com/trongtindev">
+          github.com/trongtindev
+        </md-outlined-button>
+        <md-outlined-button href="mailto:me@trongtin.dev">
+          me@trongtin.dev
+        </md-outlined-button>
+      </div>
+      <div class="space"></div>
+
+      <md-switch label="Dark mode" :selected="scheme == 'dark'" @click="() => setColorScheme('toggle')"></md-switch>
     </div>
-  </header>
-
-  <RouterView />
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<script lang="ts">
+import '@material/web/icon/icon.js'
+import '@material/web/button/filled-button'
+import '@material/web/button/outlined-button'
+import '@material/web/chips/suggestion-chip'
+import '@material/web/switch/switch'
+
+interface Data {
+  scheme: 'light' | 'dark'
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+export default {
+  data() {
+    return {
+      scheme: 'light'
+    } as Data
+  },
+  mounted() {
+    this.setColorScheme(this.getPreferredColorScheme())
+  },
+  methods: {
+    setColorScheme(scheme: 'light' | 'dark' | 'toggle') {
+      if (scheme == 'toggle') {
+        this.scheme = this.scheme == 'dark' ? 'light' : 'dark'
+      } else {
+        this.scheme = scheme
+      }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
+      switch (this.scheme) {
+        case 'dark':
+          document.body.className = 'dark'
+          break
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+        default:
+          document.body.className = 'light'
+          break
+      }
+    },
+    getPreferredColorScheme() {
+      if (window.matchMedia) {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark'
+        } else {
+          return 'light'
+        }
+      }
+      return 'light'
+    }
   }
 }
-</style>
+</script>
