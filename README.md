@@ -42,17 +42,17 @@
 
 <p align="center">
   <a href="https://github.com/trongtindev">
-    <img src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=trongtindev&theme=dark" />
+    <img src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=trongtindev&theme=transparent" />
   </a>
   <br>
   <a href="https://github.com/trongtindev">
-    <img src="https://github-readme-streak-stats.herokuapp.com/?user=trongtindev&hide_border=true&card_width=449&theme=dark" />
+    <img src="https://github-readme-streak-stats.herokuapp.com/?user=trongtindev&hide_border=true&card_width=449&theme=transparent" />
   </a>
   <a href="https://github.com/trongtindev">
-    <img src="https://github-readme-stats.vercel.app/api?username=trongtindev&hide_border=true&layout=default&theme=dark" />
+    <img src="https://github-readme-stats.vercel.app/api?username=trongtindev&hide_border=true&layout=default&theme=transparent" />
   </a>
   <br>
   <a href="https://github.com/trongtindev">
-    <img src="https://github-readme-stats.vercel.app/api/wakatime?username=trongtindev&hide_border=true&layout=compact&theme=dark" />
+    <img src="https://github-readme-stats.vercel.app/api/wakatime?username=trongtindev&hide_border=true&layout=compact&theme=transparent" />
   </a>
 </p>
