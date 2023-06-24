@@ -40,7 +40,7 @@ export default {
     } as Data
   },
   mounted() {
-    window.location.href = 'https://github.com/trongtin.dev'
+    window.location.href = 'https://github.com/trongtindev'
     this.setColorScheme(this.getPreferredColorScheme())
   },
   methods: {
