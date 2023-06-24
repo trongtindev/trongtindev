@@ -1,23 +1,25 @@
 <template>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper center">
-      <h1>Tin Nguyen Trong</h1>
-      <h2>description</h2>
-      <div class="space"></div>
+  <div class="wrapper center">
+    <h1>Tin Nguyen Trong</h1>
+    <h2>description</h2>
+    <div class="space"></div>
 
-      <div class="groups">
-        <md-outlined-button href="https://github.com/trongtindev">
-          github.com/trongtindev
-        </md-outlined-button>
-        <md-outlined-button href="mailto:me@trongtin.dev">
-          me@trongtin.dev
-        </md-outlined-button>
-      </div>
-      <div class="space"></div>
-
-      <md-switch label="Dark mode" :selected="scheme == 'dark'" @click="() => setColorScheme('toggle')"></md-switch>
+    <div class="groups">
+      <md-outlined-button href="https://github.com/trongtindev">
+        github.com/trongtindev
+      </md-outlined-button>
+      <md-outlined-button href="mailto:me@trongtin.dev"> me@trongtin.dev </md-outlined-button>
     </div>
+    <div class="space"></div>
+
+    <md-switch
+      label="Dark mode"
+      :selected="scheme == 'dark'"
+      @click="() => setColorScheme('toggle')"
+    ></md-switch>
+  </div>
 </template>
 
 <script lang="ts">
@@ -38,6 +40,7 @@ export default {
     } as Data
   },
   mounted() {
+    window.location.href = 'https://github.com/trongtin.dev'
     this.setColorScheme(this.getPreferredColorScheme())
   },
   methods: {
