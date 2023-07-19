@@ -10,7 +10,7 @@
       <md-outlined-button href="https://github.com/trongtindev">
         github.com/trongtindev
       </md-outlined-button>
-      <md-outlined-button href="mailto:me@trongtin.dev"> me@trongtin.dev </md-outlined-button>
+      <md-outlined-button href="mailto:me@trongtin.dev"> me@trongtin.dev</md-outlined-button>
     </div>
     <div class="space"></div>
 
@@ -23,54 +23,55 @@
 </template>
 
 <script lang="ts">
-import '@material/web/icon/icon.js'
-import '@material/web/button/filled-button'
-import '@material/web/button/outlined-button'
-import '@material/web/chips/suggestion-chip'
-import '@material/web/switch/switch'
+import '@material/web/icon/icon.js';
+import '@material/web/button/filled-button';
+import '@material/web/button/outlined-button';
+import '@material/web/chips/suggestion-chip';
+import '@material/web/switch/switch';
 
 interface Data {
-  scheme: 'light' | 'dark'
+  scheme: 'light' | 'dark';
 }
 
 export default {
-  data() {
+  data () {
     return {
-      scheme: 'light'
-    } as Data
+      scheme: 'light',
+    } as Data;
   },
-  mounted() {
-    window.location.href = 'https://github.com/trongtindev'
-    this.setColorScheme(this.getPreferredColorScheme())
+  mounted () {
+    this.setColorScheme(this.getPreferredColorScheme());
   },
   methods: {
-    setColorScheme(scheme: 'light' | 'dark' | 'toggle') {
+    setColorScheme (scheme: 'light' | 'dark' | 'toggle') {
       if (scheme == 'toggle') {
-        this.scheme = this.scheme == 'dark' ? 'light' : 'dark'
-      } else {
-        this.scheme = scheme
+        this.scheme = this.scheme == 'dark' ? 'light' : 'dark';
+      }
+      else {
+        this.scheme = scheme;
       }
 
       switch (this.scheme) {
         case 'dark':
-          document.body.className = 'dark'
-          break
+          document.body.className = 'dark';
+          break;
 
         default:
-          document.body.className = 'light'
-          break
+          document.body.className = 'light';
+          break;
       }
     },
-    getPreferredColorScheme() {
+    getPreferredColorScheme () {
       if (window.matchMedia) {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'dark'
-        } else {
-          return 'light'
+          return 'dark';
+        }
+        else {
+          return 'light';
         }
       }
-      return 'light'
-    }
-  }
-}
+      return 'light';
+    },
+  },
+};
 </script>
