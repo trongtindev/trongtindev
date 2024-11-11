@@ -1,12 +1,13 @@
 import { GenerativeModel, GoogleGenerativeAI } from '@google/generative-ai';
 import OpenAI from 'openai';
+import { IGenerativePrompt } from '../interfaces/generative';
 
 export type GenerativeProvider = 'gemini' | 'chatgpt';
 
 export class GenerativeAPI {
   constructor() {}
 
-  async generateContent(prompt: string): Promise<string> {
+  async generateContent(prompts: IGenerativePrompt[]): Promise<string> {
     throw new Error('NotImplemented');
   }
 }
@@ -21,8 +22,10 @@ export class GenerativeGeminiAPI implements GenerativeAPI {
     this.model = this.api.getGenerativeModel({ model: 'gemini-1.5-flash' });
   }
 
-  async generateContent(prompt: string): Promise<string> {
-    const result = await this.model.generateContent([prompt]);
+  async generateContent(prompts: IGenerativePrompt[]): Promise<string> {
+    const result = await this.model.generateContent(
+      prompts.map((e) => e.content)
+    );
     return result.response.text();
   }
 }
@@ -38,9 +41,9 @@ export class GenerativeOpenAIAPI implements GenerativeAPI {
     });
   }
 
-  async generateContent(prompt: string): Promise<string> {
+  async generateContent(prompts: IGenerativePrompt[]): Promise<string> {
     const result = await this.client.chat.completions.create({
-      messages: [{ role: 'user', content: prompt }],
+      messages: prompts,
       model: 'gpt-3.5-turbo'
     });
 

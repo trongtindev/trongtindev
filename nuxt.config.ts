@@ -16,5 +16,8 @@ export default defineNuxtConfig({
     server: {
       warmup: {}
     }
+  },
+  devServer: {
+    port: 3000
   }
 });

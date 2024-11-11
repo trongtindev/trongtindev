@@ -1,15 +1,23 @@
+import { IGenerativePrompt } from '~~/server/interfaces/generative';
 import { GenerativeProvider } from '~~/server/utils/apiFactory';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  if (!body) throw createError({ status: 400 });
+  if (!body) throw createError({ status: 400, message: 'invalid_body' });
 
-  if (typeof body.prompt != 'string') {
-    throw createError({ status: 400 });
+  // prompts
+  if (typeof body.prompts == 'undefined') {
+    throw createError({ status: 400, message: 'invalid_prompts' });
   }
-  const prompt: string = body.prompt;
-  if (prompt.length > 512) throw createError({ status: 400 });
+  const prompts: IGenerativePrompt[] = body.prompts;
+  if (typeof prompts != 'object') {
+    throw createError({ status: 400, message: 'invalid_prompts' });
+  }
+  if (prompts.length == 0 || prompts.length > 10) {
+    throw createError({ status: 400, message: 'invalid_length' });
+  }
 
+  // provider
   if (typeof body.provider != 'string') {
     throw createError({ status: 400 });
   }
@@ -19,7 +27,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const generativeAPI = getGenerativeAPI(provider);
-  const response = await generativeAPI.generateContent(prompt);
+  const response = await generativeAPI.generateContent(prompts);
 
-  return response.replaceAll('```json', '').replaceAll('```', '').trim();
+  return response.trim();
 });
