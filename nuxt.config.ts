@@ -8,7 +8,8 @@ export default defineNuxtConfig({
   nitro: {},
   runtimeConfig: {
     GEMINI_KEY: '',
-    OPENAI_KEY: ''
+    OPENAI_KEY: '',
+    OPENAI_ENDPOINT: ''
   },
   vue: {},
   vite: {

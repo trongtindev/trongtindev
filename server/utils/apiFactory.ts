@@ -34,10 +34,10 @@ export class GenerativeOpenAIAPI implements GenerativeAPI {
   private client: OpenAI;
 
   constructor() {
-    const { OPENAI_KEY } = useRuntimeConfig();
+    const { OPENAI_KEY, OPENAI_ENDPOINT } = useRuntimeConfig();
     this.client = new OpenAI({
       apiKey: OPENAI_KEY,
-      baseURL: 'https://open.keyai.shop/v1'
+      baseURL: OPENAI_ENDPOINT ?? null
     });
   }
 
