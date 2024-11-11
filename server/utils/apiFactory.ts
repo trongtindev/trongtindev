@@ -22,10 +22,10 @@ export class GenerativeGeminiAPI implements GenerativeAPI {
   private model: GenerativeModel;
 
   constructor() {
-    const { GEMINI_KEY } = useRuntimeConfig();
+    const { GEMINI_KEY, GEMINI_MODEL } = useRuntimeConfig();
     this.api = new GoogleGenerativeAI(GEMINI_KEY);
     this.model = this.api.getGenerativeModel({
-      model: 'gemini-1.5-flash',
+      model: GEMINI_MODEL,
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -67,9 +67,10 @@ export class GenerativeOpenAIAPI implements GenerativeAPI {
   }
 
   async generateContent(prompts: IGenerativePrompt[]): Promise<string> {
+    const { OPENAI_MODEL } = useRuntimeConfig();
     const result = await this.client.chat.completions.create({
       messages: prompts,
-      model: 'gpt-3.5-turbo'
+      model: OPENAI_MODEL
     });
 
     return result.choices[0].message.content!;

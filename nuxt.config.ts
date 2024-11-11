@@ -8,7 +8,9 @@ export default defineNuxtConfig({
   nitro: {},
   runtimeConfig: {
     GEMINI_KEY: '',
+    GEMINI_MODEL: 'gemini-1.5-flash',
     OPENAI_KEY: '',
+    OPENAI_MODEL: 'gpt-4o-mini',
     OPENAI_ENDPOINT: ''
   },
   vue: {},
