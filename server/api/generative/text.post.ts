@@ -29,5 +29,7 @@ export default defineEventHandler(async (event) => {
   const generativeAPI = getGenerativeAPI(provider);
   const response = await generativeAPI.generateContent(prompts);
 
-  return response.trim();
+  return {
+    content: response.trim()
+  };
 });
