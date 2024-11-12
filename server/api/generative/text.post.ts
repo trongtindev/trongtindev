@@ -1,7 +1,11 @@
+import { unstable_checkRateLimit as checkRateLimit } from '@vercel/firewall';
 import { IGenerativePrompt } from '~~/server/interfaces/generative';
 import { GenerativeProvider } from '~~/server/utils/apiFactory';
 
 export default defineEventHandler(async (event) => {
+  const { rateLimited } = await checkRateLimit('api-generative');
+  if (rateLimited) throw createError({ status: 429 });
+
   const body = await readBody(event);
   if (!body) throw createError({ status: 400, message: 'invalid_body' });
 
