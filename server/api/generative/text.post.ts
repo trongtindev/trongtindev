@@ -17,6 +17,12 @@ export default defineEventHandler(async (event) => {
     throw createError({ status: 400, message: 'invalid_length' });
   }
 
+  // schema
+  if (typeof body.schema == 'undefined') {
+    throw createError({ status: 400, message: 'schema' });
+  }
+  const schema: Record<string, unknown> = body.schema;
+
   // provider
   if (typeof body.provider != 'string') {
     throw createError({ status: 400 });
@@ -27,7 +33,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const generativeAPI = getGenerativeAPI(provider);
-  const response = await generativeAPI.generateContent(prompts);
+  const response = await generativeAPI.generateContent(prompts, schema);
 
   return {
     content: response.trim()

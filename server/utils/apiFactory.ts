@@ -12,20 +12,35 @@ export type GenerativeProvider = 'gemini' | 'chatgpt';
 export class GenerativeAPI {
   constructor() {}
 
-  async generateContent(prompts: IGenerativePrompt[]): Promise<string> {
+  async generateContent(
+    prompts: IGenerativePrompt[],
+    json_schema: Record<string, unknown>
+  ): Promise<string> {
     throw new Error('NotImplemented');
   }
 }
 
 export class GenerativeGeminiAPI implements GenerativeAPI {
   private api: GoogleGenerativeAI;
-  private model: GenerativeModel;
 
   constructor() {
-    const { GEMINI_KEY, GEMINI_MODEL } = useRuntimeConfig();
+    const { GEMINI_KEY } = useRuntimeConfig();
     this.api = new GoogleGenerativeAI(GEMINI_KEY);
-    this.model = this.api.getGenerativeModel({
+  }
+
+  async generateContent(
+    prompts: IGenerativePrompt[],
+    schema: Record<string, unknown>
+  ): Promise<string> {
+    const { GEMINI_MODEL, GEMINI_OUTPUT_LENGTH } = useRuntimeConfig();
+
+    const model = this.api.getGenerativeModel({
       model: GEMINI_MODEL,
+      generationConfig: {
+        responseMimeType: 'application/json',
+        maxOutputTokens: GEMINI_OUTPUT_LENGTH,
+        responseSchema: schema
+      },
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -45,12 +60,7 @@ export class GenerativeGeminiAPI implements GenerativeAPI {
         }
       ]
     });
-  }
-
-  async generateContent(prompts: IGenerativePrompt[]): Promise<string> {
-    const result = await this.model.generateContent(
-      prompts.map((e) => e.content)
-    );
+    const result = await model.generateContent(prompts.map((e) => e.content));
     return result.response.text();
   }
 }
@@ -66,11 +76,23 @@ export class GenerativeOpenAIAPI implements GenerativeAPI {
     });
   }
 
-  async generateContent(prompts: IGenerativePrompt[]): Promise<string> {
-    const { OPENAI_MODEL } = useRuntimeConfig();
+  async generateContent(
+    prompts: IGenerativePrompt[],
+    schema: Record<string, unknown>
+  ): Promise<string> {
+    const { OPENAI_MODEL, OPENAI_OUTPUT_LENGTH } = useRuntimeConfig();
     const result = await this.client.chat.completions.create({
+      response_format: {
+        type: 'json_schema',
+        json_schema: {
+          name: 'response',
+          schema
+        }
+      },
       messages: prompts,
-      model: OPENAI_MODEL
+      model: OPENAI_MODEL,
+      max_tokens: OPENAI_OUTPUT_LENGTH,
+      max_completion_tokens: OPENAI_OUTPUT_LENGTH
     });
 
     return result.choices[0].message.content!;
