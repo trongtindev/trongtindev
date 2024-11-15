@@ -35,11 +35,5 @@ export default defineNuxtConfig({
     port: 3000
   },
 
-  modules: ['@nuxt/ui', '@nuxt/content'],
-
-  routeRules: {
-    '/': { prerender: true }
-  },
-
-  content: {}
+  modules: ['@nuxt/ui']
 });
