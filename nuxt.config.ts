@@ -2,9 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
+
   future: {
     compatibilityVersion: 4
   },
+
   nitro: {
     storage: {
       base: { driver: 'vercelKV' }
@@ -16,7 +18,9 @@ export default defineNuxtConfig({
       }
     }
   },
+
   runtimeConfig: {
+    TZ: 'Asia/Ho_Chi_Minh',
     AUTH_TOKEN: '',
     GEMINI_KEY: '',
     GEMINI_MODEL: 'gemini-1.5-flash',
@@ -26,7 +30,16 @@ export default defineNuxtConfig({
     OPENAI_ENDPOINT: '',
     OPENAI_OUTPUT_LENGTH: 1024
   },
+
   devServer: {
     port: 3000
-  }
+  },
+
+  modules: ['@nuxt/ui', '@nuxt/content'],
+
+  routeRules: {
+    '/': { prerender: true }
+  },
+
+  content: {}
 });

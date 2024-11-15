@@ -13,7 +13,6 @@ export default defineEventHandler((event) => {
       authorization.split(' ')[1],
       AUTH_TOKEN
     ) as IAuth;
-    console.log('authorization', authorization, event.context.auth);
   } catch (error: any) {
     if (error.name == 'TokenExpiredError') {
       throw createError({ status: 401 });
