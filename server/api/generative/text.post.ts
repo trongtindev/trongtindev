@@ -32,7 +32,6 @@ export default defineEventHandler(async (event) => {
     'RateLimit-Remaining',
     auth.package.aiGenCount - usage.count
   );
-  console.log('usage', rateLimitKey, usage);
 
   const body = await readBody(event);
   if (!body) throw createError({ status: 400, message: 'invalid_body' });
