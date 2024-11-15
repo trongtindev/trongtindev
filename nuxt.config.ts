@@ -7,7 +7,13 @@ export default defineNuxtConfig({
   },
   nitro: {
     storage: {
-      cache: { driver: 'vercelKV' }
+      base: { driver: 'vercelKV' }
+    },
+    devStorage: {
+      base: {
+        driver: 'fs',
+        base: './data/base'
+      }
     }
   },
   runtimeConfig: {
