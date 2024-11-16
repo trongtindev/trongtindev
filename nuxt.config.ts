@@ -28,7 +28,9 @@ export default defineNuxtConfig({
     OPENAI_KEY: '',
     OPENAI_MODEL: 'gpt-4o-mini',
     OPENAI_ENDPOINT: '',
-    OPENAI_OUTPUT_LENGTH: 1024
+    OPENAI_OUTPUT_LENGTH: 1024,
+    MONGODB_URI: '',
+    MONGODB_NAME: 'trongtin'
   },
 
   devServer: {

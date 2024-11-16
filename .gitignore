@@ -23,3 +23,4 @@ logs
 .env.*
 !.env.example
 test.schema.json
+data

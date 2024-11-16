@@ -1,4 +1,4 @@
-import { IAuth } from '~~/server/interfaces/auth';
+import { IPlan } from '~~/server/interfaces/auth';
 import { IGenerativePrompt } from '~~/server/interfaces/generative';
 import { GenerativeProvider } from '~~/server/utils/apiFactory';
 
@@ -11,26 +11,26 @@ export default defineEventHandler(async (event) => {
   const storage = useStorage('base');
 
   // check rate limit
-  const auth: IAuth = event.context.auth;
-  if (!auth) throw createError({ status: 401 });
-  if (!auth.package || typeof auth.package.aiGenCount != 'number') {
+  const plan: IPlan = event.context.plan;
+  if (!plan) throw createError({ status: 401 });
+  if (!plan.package || typeof plan.package.aiGenCount != 'number') {
     throw createError({ status: 400, message: 'invalid_aiGenCount' });
   }
   const day = new Date().getDate();
-  const rateLimitKey = `aiGenCount-${auth.userId}`;
+  const rateLimitKey = `aiGenCount-${plan.userId}`;
   let usage = await storage.getItem<IUsage>(rateLimitKey);
   if (!usage) usage = { count: 0, day };
   if (usage.day != day) usage = { count: 0, day };
-  if (usage.count >= auth.package.aiGenCount) {
+  if (usage.count >= plan.package.aiGenCount) {
     throw createError({ status: 429, message: 'rate limit exceeded' });
   }
 
   usage.count += 1;
-  setResponseHeader(event, 'RateLimit-Limit', auth.package.aiGenCount);
+  setResponseHeader(event, 'RateLimit-Limit', plan.package.aiGenCount);
   setResponseHeader(
     event,
     'RateLimit-Remaining',
-    auth.package.aiGenCount - usage.count
+    plan.package.aiGenCount - usage.count
   );
 
   const body = await readBody(event);
