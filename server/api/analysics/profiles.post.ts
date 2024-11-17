@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
     avatar: string;
     gender: number;
     phoneNumber?: string;
+    sdob?: string;
   }[] = body.items;
   if (typeof items != 'object' || !items) {
     throw createError({ status: 400, message: 'invalid_items' });
@@ -38,6 +39,7 @@ export default defineEventHandler(async (event) => {
             zaloName: e.zaloName,
             gender: e.gender,
             phoneNumber: e.phoneNumber,
+            sdob: e.sdob,
             createdAt: Date.now()
           }
         }
