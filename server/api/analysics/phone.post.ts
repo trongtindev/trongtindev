@@ -15,20 +15,15 @@ export default defineEventHandler(async (event) => {
   }
 
   const db = await getDb();
-  await db.collection('users').bulkWrite(
+  await db.collection('phone_commits').bulkWrite(
     items.map((e) => {
       return {
-        updateOne: {
-          filter: {
-            userId: e.userId
-          },
-          update: {
-            $set: {
-              phone: e.phone,
-              updatedAt: Date.now()
-            }
-          },
-          upsert: true
+        insertOne: {
+          document: {
+            userId: e.userId,
+            phone: e.phone,
+            updatedAt: Date.now()
+          }
         }
       };
     })

@@ -5,8 +5,10 @@ export default defineEventHandler(async (event) => {
   const items: {
     userId: string;
     displayName: string;
+    zaloName: string;
     avatar: string;
     gender: number;
+    phoneNumber?: string;
   }[] = body.items;
   if (typeof items != 'object' || !items) {
     throw createError({ status: 400, message: 'invalid_items' });
@@ -25,22 +27,19 @@ export default defineEventHandler(async (event) => {
   }
 
   const db = await getDb();
-  await db.collection('users').bulkWrite(
+  await db.collection('profile_commits').bulkWrite(
     items.map((e) => {
       return {
-        updateOne: {
-          filter: {
-            userId: e.userId
-          },
-          update: {
-            $set: {
-              displayName: e.displayName,
-              avatar: e.avatar,
-              gender: e.gender,
-              updatedAt: Date.now()
-            }
-          },
-          upsert: true
+        insertOne: {
+          document: {
+            userId: e.userId,
+            displayName: e.displayName,
+            avatar: e.avatar,
+            zaloName: e.zaloName,
+            gender: e.gender,
+            phoneNumber: e.phoneNumber,
+            createdAt: Date.now()
+          }
         }
       };
     })
