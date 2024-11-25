@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   const mainOldLog = formData.get('mainOldLog');
   if (!mainLog) throw createError({ status: 400 });
 
-  const folder = dayjs().format('MM-HH_DD-MM-YY');
+  const folder = dayjs().format('HH:mm_DD-MM-YY');
 
   await uploadS3Object(
     mainLog.toString(),
