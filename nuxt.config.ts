@@ -35,7 +35,8 @@ export default defineNuxtConfig({
     S3_SECRET: '',
     S3_BUCKET: 'analysics',
     S3_REGION: 'sgp1',
-    S3_ENDPOINT: 'https://sgp1.digitaloceanspaces.com'
+    S3_ENDPOINT: 'https://sgp1.digitaloceanspaces.com',
+    FIREBASE_KEY: ''
   },
 
   devServer: {
