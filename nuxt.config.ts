@@ -30,7 +30,12 @@ export default defineNuxtConfig({
     OPENAI_ENDPOINT: '',
     OPENAI_OUTPUT_LENGTH: 1024,
     MONGODB_URI: '',
-    MONGODB_NAME: 'trongtin'
+    MONGODB_NAME: 'trongtin',
+    S3_KEY: '',
+    S3_SECRET: '',
+    S3_BUCKET: 'analysics',
+    S3_REGION: 'sgp1',
+    S3_ENDPOINT: 'https://sgp1.digitaloceanspaces.com'
   },
 
   devServer: {

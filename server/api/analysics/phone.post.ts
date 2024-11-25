@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
           document: {
             userId: e.userId,
             phoneNumber: e.phoneNumber,
-            updatedAt: Date.now()
+            createdAt: new Date()
           }
         }
       };

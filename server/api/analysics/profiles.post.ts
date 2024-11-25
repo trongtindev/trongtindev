@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
             gender: e.gender,
             phoneNumber: e.phoneNumber,
             sdob: e.sdob,
-            createdAt: Date.now()
+            createdAt: new Date()
           }
         }
       };
