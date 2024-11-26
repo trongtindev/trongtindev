@@ -5,20 +5,28 @@ export default defineEventHandler(async (event) => {
   const auth = event.context.auth as IAuth;
   const formData = await readFormData(event);
 
-  const mainLog = formData.get('mainLog');
-  const mainOldLog = formData.get('mainOldLog');
-  if (!mainLog) throw createError({ status: 400 });
+  const files = formData.getAll('files');
+  if (!files || files.length == 0) throw createError({ status: 400 });
 
   const folder = dayjs().format('HH:mm_DD-MM-YY');
 
-  await uploadS3Object(
-    mainLog.toString(),
-    `logs/${auth.userId}/${folder}/mainLog.log`
+  const maxSize = 1024 * 1024 * 10;
+  const result = await Promise.all(
+    files
+      .splice(0, 5)
+      .filter((e, i) => {
+        const size = e.toString().length;
+        if (import.meta.dev) {
+          console.log(i, { size, maxSize }, (size / maxSize) * 100);
+        }
+        return size <= maxSize;
+      })
+      .map((e, i) => {
+        return uploadS3Object(
+          e.toString(),
+          `logs/${auth.userId}/${folder}/combined${i}.log`
+        );
+      })
   );
-  if (mainOldLog) {
-    await uploadS3Object(
-      mainOldLog.toString(),
-      `logs/${auth.userId}/${folder}/mainOldLog.log`
-    );
-  }
+  return result.map((e) => e.ETag);
 });

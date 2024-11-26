@@ -29,5 +29,6 @@ export const uploadS3Object = async (
     Bucket: S3_BUCKET,
     ACL: acl
   });
-  await client.send(command);
+  const result = await client.send(command);
+  return result;
 };
