@@ -3,15 +3,12 @@ import admin from 'firebase-admin';
 import { UserRecord } from 'firebase-admin/auth';
 
 if (admin.apps.length == 0) {
-  const FIREBASE_KEY = useRuntimeConfig().FIREBASE_KEY;
-  const credential =
-    typeof FIREBASE_KEY == 'string' ? JSON.parse(FIREBASE_KEY) : FIREBASE_KEY;
-
+  const GOOGLE_KEY = useRuntimeConfig().GOOGLE_KEY;
   admin.initializeApp({
     credential: admin.credential.cert({
-      projectId: credential.project_id,
-      privateKey: credential.private_key,
-      clientEmail: credential.client_email
+      projectId: GOOGLE_KEY.project_id,
+      privateKey: GOOGLE_KEY.private_key,
+      clientEmail: GOOGLE_KEY.client_email
     })
   });
 }

@@ -1,6 +1,5 @@
-import { IPlan } from '~~/server/interfaces/auth';
-import { IGenerativePrompt } from '~~/server/interfaces/generative';
-import { GenerativeProvider } from '~~/server/utils/apiFactory';
+import type { IPlan } from '~~/server/interfaces/auth';
+import type { IGenerativePrompt } from '~~/server/interfaces/generative';
 
 interface IUsage {
   count: number;
@@ -53,21 +52,30 @@ export default defineEventHandler(async (event) => {
     throw createError({ status: 400, message: 'schema' });
   }
   const schema: Record<string, unknown> = body.schema;
-
-  // provider
-  if (typeof body.provider != 'string') {
-    throw createError({ status: 400 });
+  const result = await generateContent(
+    {
+      contents: prompts.map((e) => {
+        return {
+          role: e.role,
+          parts: [
+            {
+              text: e.content
+            }
+          ]
+        };
+      })
+    },
+    {
+      responseSchema: schema
+    }
+  );
+  if (result.isError) {
+    throw createError({ status: 500, message: result.error.message });
   }
-  const provider: GenerativeProvider = body.provider;
-  if (!['gemini', 'chatgpt'].includes(provider)) {
-    throw createError({ status: 400 });
+
+  const candidates = result.value.response.candidates;
+  if (!candidates) {
+    throw createError({ status: 500, message: 'invalid_candidates' });
   }
-
-  const generativeAPI = getGenerativeAPI(provider);
-  const response = await generativeAPI.generateContent(prompts, schema);
-
-  // update rate limit
-  await storage.setItem(rateLimitKey, usage);
-
-  return { content: response.trim() };
+  return { content: candidates[0].content.parts[0].text };
 });
