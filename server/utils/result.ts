@@ -1,6 +1,6 @@
 export class Result<T> {
-  value: T;
-  error: Error;
+  value!: T;
+  error!: Error;
 
   public get code(): string {
     return typeof this.error.cause == 'string' ? this.error.cause : 'unknown';

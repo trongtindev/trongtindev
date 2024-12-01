@@ -1,4 +1,4 @@
-import { IAuth } from '~~/server/interfaces/auth';
+import type { IAuth } from '~~/server/interfaces/auth';
 import dayjs from 'dayjs';
 
 export default defineEventHandler(async (event) => {

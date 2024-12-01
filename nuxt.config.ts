@@ -1,14 +1,24 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  modules: [
+    '@nuxtjs/robots',
+    '@pinia/nuxt',
+    '@nuxtjs/sitemap',
+    '@nuxt/image',
+    '@nuxt/eslint',
+    '@nuxt/ui'
+  ],
+
   $development: {
+    devtools: { enabled: false },
     typescript: {
       strict: true
     }
   },
 
-  compatibilityDate: '2024-04-03',
-
-  devtools: { enabled: false },
+  imports: {
+    dirs: ['../shared/**']
+  },
 
   future: {
     compatibilityVersion: 4
@@ -24,6 +34,9 @@ export default defineNuxtConfig({
         driver: 'fs',
         base: './data/base'
       }
+    },
+    imports: {
+      dirs: ['server/schemas']
     }
   },
 
@@ -51,5 +64,5 @@ export default defineNuxtConfig({
     port: 3000
   },
 
-  modules: ['@nuxt/ui']
+  compatibilityDate: '2024-04-03'
 });

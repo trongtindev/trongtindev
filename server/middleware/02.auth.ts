@@ -1,5 +1,5 @@
 import jsonwebtoken from 'jsonwebtoken';
-import { IAuth } from '../interfaces/auth';
+import type { IAuth } from '../interfaces/auth';
 
 export default defineEventHandler((event) => {
   if (!event.path.startsWith('/api')) return;

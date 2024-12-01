@@ -1,4 +1,4 @@
-import { IAuth } from '~~/server/interfaces/auth';
+import type { IAuth } from '~~/server/interfaces/auth';
 import admin from 'firebase-admin';
 import { UserRecord } from 'firebase-admin/auth';
 
