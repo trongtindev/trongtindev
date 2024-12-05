@@ -4,13 +4,15 @@ export default defineEventHandler(async (event) => {
 
   const items: { userId: string; phoneNumber: string }[] = body.items;
   if (!items || !Array.isArray(items) || items.length == 0) {
+    console.log(body);
     throw createError({ status: 400, message: 'invalid_items1' });
   }
 
-  const validate = items.every((e) => {
-    return typeof e.phoneNumber == 'string' && typeof e.userId == 'string';
+  const validate = items.find((e) => {
+    return typeof e.phoneNumber != 'string' || typeof e.userId != 'string';
   });
   if (!validate) {
+    console.log(body, { validate });
     throw createError({ status: 400, message: 'invalid_items2' });
   }
 
