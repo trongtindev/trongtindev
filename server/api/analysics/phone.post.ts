@@ -3,15 +3,15 @@ export default defineEventHandler(async (event) => {
   if (!body) throw createError({ status: 400, message: 'invalid_body' });
 
   const items: { userId: string; phoneNumber: string }[] = body.items;
-  if (typeof items != 'object' || !items) {
-    throw createError({ status: 400, message: 'invalid_items' });
+  if (!items || !Array.isArray(items) || items.length == 0) {
+    throw createError({ status: 400, message: 'invalid_items1' });
   }
 
   const validate = items.every((e) => {
     return typeof e.phoneNumber == 'string' && typeof e.userId == 'string';
   });
   if (!validate) {
-    throw createError({ status: 400, message: 'invalid_items' });
+    throw createError({ status: 400, message: 'invalid_items2' });
   }
 
   const db = await getDb();
@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
       return {
         insertOne: {
           document: {
+            ...e,
             userId: e.userId,
             phoneNumber: e.phoneNumber,
             createdAt: new Date()
