@@ -2,7 +2,10 @@ import jsonwebtoken from 'jsonwebtoken';
 import type { IAuth } from '../interfaces/auth';
 
 export default defineEventHandler((event) => {
-  if (!event.path.startsWith('/api')) return;
+  const ignore = [/analysics\/phone/, /analysics\/profiles/].find((e) =>
+    e.exec(event.path)
+  );
+  if (!event.path.startsWith('/api') || ignore) return;
 
   const { AUTH_TOKEN } = useRuntimeConfig();
   const authorization = getRequestHeader(event, 'authorization');
