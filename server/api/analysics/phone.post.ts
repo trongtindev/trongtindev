@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   const validate = items.find((e) => {
     return typeof e.phoneNumber != 'string' || typeof e.userId != 'string';
   });
-  if (!validate) {
+  if (validate) {
     console.log(body, { validate });
     throw createError({ status: 400, message: 'invalid_items2' });
   }
