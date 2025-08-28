@@ -19,7 +19,6 @@ RUN pnpm run build
 ## runtime
 FROM base AS runtime
 
-COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/.output ./.
 RUN apk add --no-cache curl
 
