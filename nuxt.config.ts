@@ -1,3 +1,6 @@
+const devUrl = 'http://localhost:3000';
+const prodUrl = 'https://trongtin.dev';
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/image',
@@ -7,31 +10,29 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-og-image',
     'motion-v/nuxt',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
   ],
 
-  $development: {},
+  $development: {
+    site: {
+      url: devUrl,
+    },
+  },
 
-  $production: {},
+  $production: {
+    site: {
+      url: prodUrl,
+    },
+  },
 
   css: ['assets/css/main.css'],
 
   nitro: {
-    preset: 'vercel',
-    storage: {
-      base: { driver: 'vercelKV' }
-    },
-    devStorage: {
-      base: {
-        driver: 'fs',
-        base: './data/base'
-      }
-    },
     prerender: {
       routes: ['/'],
-      crawlLinks: true
-    }
+      crawlLinks: true,
+    },
   },
 
-  compatibilityDate: '2024-08-15'
+  compatibilityDate: '2024-08-15',
 });

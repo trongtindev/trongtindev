@@ -1,9 +1,9 @@
 # base
 FROM node:23-alpine AS base
 WORKDIR /app
-ENV TZ="Asia/Ho_Chi_Minh"
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+ENV NITRO_PRESET=node
 COPY . .
 RUN corepack enable
 
@@ -20,8 +20,7 @@ RUN pnpm run build
 FROM base AS runtime
 
 COPY --from=prod-deps /app/node_modules ./node_modules
-COPY --from=build /app/dist ./dist
-RUN npm install -g http-server
+COPY --from=build /app/.output ./.
 RUN apk add --no-cache curl
 
-CMD [ "http-server", "dist" ]
+CMD ["node", "/app/server/index.mjs"]
