@@ -1,25 +1,26 @@
-# base
-FROM node:23-alpine AS base
+# Build Stage 1
+FROM node:23-alpine AS build
 WORKDIR /app
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-ENV NITRO_PRESET=node
-COPY . .
+
 RUN corepack enable
 
-## prod-deps
-FROM base AS prod-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+# Copy package.json and your lockfile, here we add pnpm-lock.yaml for illustration
+COPY package.json pnpm-lock.yaml .npmrc ./
 
-## build
-FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+# Install dependencies
+RUN pnpm i
+
+# Copy the entire project
+COPY . ./
+
+# Build the project
 RUN pnpm run build
 
-## runtime
-FROM base AS runtime
+# Build Stage 2
+FROM node:23-alpine
+WORKDIR /app
 
-COPY --from=build /app/.output ./.
-RUN apk add --no-cache curl
+# Only `.output` folder is needed from the build stage
+COPY --from=build /app/.output/ ./
 
 CMD ["node", "/app/server/index.mjs"]
