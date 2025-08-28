@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "rules": {
+    "no-unused-vars": "warn",
+    "explicit-function-return-type": "off",
+    "explicit-module-boundary-types": "off",
+    "no-undefined": "off",
+    "no-async-await": "off",
+    "no-rest-spread-properties": "off",
+    "no-extraneous-class": "off",
+    "no-await-in-loop": "off",
+    "no-optional-chaining": "off"
+  },
+  "categories": {
+    "correctness": "warn",
+    "suspicious": "warn",
+    "perf": "warn",
+    "restriction": "warn"
+  },
+  "plugins": ["typescript", "oxc"]
+}
