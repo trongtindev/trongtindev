@@ -12,17 +12,14 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.876.0",
     "@iconify-json/lucide": "^1.2.65",
     "@iconify-json/simple-icons": "^1.2.49",
     "@nuxt/content": "^3.6.3",
     "@nuxt/image": "^1.11.0",
     "@nuxt/ui": "4.0.0-alpha.0",
     "@nuxtjs/sitemap": "^7.4.3",
-    "@pinia/nuxt": "^0.11.2",
     "@vueuse/nuxt": "^13.8.0",
     "better-sqlite3": "^12.2.0",
-    "dayjs": "^1.11.15",
     "motion-v": "^1.7.0",
     "nuxt-og-image": "^5.1.9"
   },
