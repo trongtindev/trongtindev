@@ -7,8 +7,8 @@ description: 'Experienced frontend, backend, and cross-platform app developer sp
 
 hero:
   links:
-    - label: 'Use this template'
-      to: https://github.com/nuxt-ui-pro/portfolio
+    - label: 'github/trongtindev'
+      to: https://github.com/trongtindev
       color: 'neutral'
   images:
     - src: https://picsum.photos/468/468?random=1
