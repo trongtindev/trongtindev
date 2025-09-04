@@ -12,23 +12,23 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.65",
-    "@iconify-json/simple-icons": "^1.2.49",
+    "@iconify-json/lucide": "^1.2.66",
+    "@iconify-json/simple-icons": "^1.2.50",
     "@nuxt/content": "^3.6.3",
     "@nuxt/image": "^1.11.0",
     "@nuxt/ui": "4.0.0-alpha.0",
     "@nuxtjs/sitemap": "^7.4.3",
-    "@vueuse/nuxt": "^13.8.0",
+    "@vueuse/nuxt": "^13.9.0",
     "better-sqlite3": "^12.2.0",
-    "motion-v": "^1.7.0",
+    "motion-v": "^1.7.1",
     "nuxt-og-image": "^5.1.9"
   },
   "devDependencies": {
     "@prettier/plugin-oxc": "^0.0.4",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "eslint-plugin-oxlint": "^1.12.0",
-    "nuxt": "^4.0.3",
-    "oxlint": "^1.12.0",
+    "eslint-plugin-oxlint": "^1.14.0",
+    "nuxt": "^4.1.0",
+    "oxlint": "^1.14.0",
     "prettier": "^3.6.2",
     "sharp": "^0.34.3",
     "typescript": "5.9.2"
