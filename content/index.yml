@@ -1,8 +1,9 @@
 seo:
-  title: 'Tin Nguyen Trong - Developer'
-  description: "Welcome to my portfolio! I'm Emma Thompson, a UX/UI designer and front-end developer based in Boston. I specialize in creating user-centered digital experiences that are both beautiful and functional."
-title: "Hey, I'm Emma Thompson UX/UI Designer"
-description: 'I craft intuitive digital experiences where design meets functionality. Based in Boston, bringing ideas to life through code and creativity.'
+  title: 'Tin Nguyen Trong | Fullstack Developer - Web & Cross-Platform Apps'
+  description: 'Experienced frontend, backend, and cross-platform app developer specializing in Vue, Nuxt, Flutter, NestJS, and Docker. I build scalable web platforms and mobile apps with clean code, performance, and user-focused design.'
+
+title: 'Fullstack Developer - Web & Cross-Platform Apps'
+description: 'Experienced frontend, backend, and cross-platform app developer specializing in Vue, Nuxt, Flutter, NestJS, and Docker. I build scalable web platforms and mobile apps with clean code, performance, and user-focused design.'
 
 hero:
   links:
@@ -32,8 +33,7 @@ hero:
 about:
   title: 'About Me'
   description: |
-    As a UX/UI designer and front-end developer with 6 years of experience, I leverage my Boston University Interactive Design degree to craft user-centered digital experiences.
-    My approach blends creative strategy with technical expertise, transforming concepts into functional, purposeful digital products that seamlessly integrate design and technology.
+    I'm a versatile software developer specializing in frontend, backend, and cross-platform applications. With hands-on experience in building scalable web platforms and mobile apps, I work across the full stack—from designing intuitive UIs to architecting robust APIs and databases. My toolkit includes JavaScript/TypeScript, Vue/Nuxt, Flutter, NestJS, TypeORM, and Docker, allowing me to deliver efficient, reliable, and maintainable solutions. I enjoy collaborating with clients worldwide, turning ideas into polished products with a focus on performance, usability, and long-term scalability.
 
 experience:
   title: Work Experience
